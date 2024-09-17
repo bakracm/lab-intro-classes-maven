@@ -86,9 +86,12 @@ public class BigFraction {
    *   The fraction in string form
    */
   public BigFraction(String str) {
-    this.num = DEFAULT_NUMERATOR;
-    this.denom = DEFAULT_DENOMINATOR;
+ 
+    this.num = BigInteger.valueOf((int)(str(substring(0,1))));
+    this.denom = BigInteger.valueOf((int)(str(substring(2,3))));
   } // BigFraction
+
+
 
   // +---------+------------------------------------------------------
   // | Methods |
@@ -122,6 +125,19 @@ public class BigFraction {
     resultNumerator =
       (this.num.multiply(addend.denom)).add(addend.num.multiply(this.denom));
 
+    // Return the computed value
+    return new BigFraction(resultNumerator, resultDenominator);
+  } // add(BigFraction)
+
+
+
+  public BigFraction multiply(BigFraction addend) {
+    BigInteger resultNumerator;
+    BigInteger resultDenominator;
+
+    resultDenominator = this.denom.multiply(addend.denom);
+    resultNumerator = this.num.multiply(addend.num);
+  
     // Return the computed value
     return new BigFraction(resultNumerator, resultDenominator);
   } // add(BigFraction)
@@ -160,4 +176,20 @@ public class BigFraction {
     // return this.num.toString().concat("/").concat(this.denom.toString());
     return this.num + "/" + this.denom;
   } // toString()
+
+
+  // Takes in bigfraction and returns bigfracto
+  
+  public BigFraction fractional(){
+
+    BigInteger resultNumerator;
+    BigInteger resultDenominator;
+
+    resultNumerator = BigInteger.valueOf((int)(numerator().doubleValue() % denominator().doubleValue()));
+    resultDenominator = this.denom;
+  
+    // Return the computed value
+    return new BigFraction(resultNumerator, resultDenominator);
+  } // add(BigFraction)
+
 } // class BigFraction
